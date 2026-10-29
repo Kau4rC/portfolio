@@ -38,7 +38,7 @@ Visited on desktop and mobile, often in bright office or library light. Content 
 
 ## Brand Commitments
 
-Name: Julz Kaupper Cortes, presented as Julz Cortes. Voice: direct, technical, understated confidence — the candidate's own language, not marketing filler. Real handles: `github.com/kau4r`, `julzkaupper14@gmail.com`, `linkedin.com/in/julz-kaupper-c-793716297/`.
+Name: Julz Kaupper Cortes, presented as Julz Cortes. Voice: direct, technical, understated confidence — the candidate's own language, not marketing filler. Real handles: `github.com/Kau4rC`, `julzkaupper14@gmail.com`, `linkedin.com/in/julz-kaupper-c-793716297/`.
 
 ## Evidence on Hand
 

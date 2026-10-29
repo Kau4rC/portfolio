@@ -5,8 +5,8 @@ export const profile = {
   location: "Mandaue City, Philippines",
   email: "julzkaupper14@gmail.com",
   github: {
-    label: "github.com/kau4r",
-    href: "https://github.com/kau4r",
+    label: "github.com/Kau4rC",
+    href: "https://github.com/Kau4rC",
   },
   linkedin: {
     label: "in/julz-kaupper-c",
