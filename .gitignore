@@ -49,3 +49,7 @@ next-env.d.ts
 # private source resume
 /Resume.pdf
 
+
+# vercel
+/.vercel/
+
