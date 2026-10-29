@@ -1,26 +1,181 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Surface */
+  --color-void: #05070a;
+  --color-surface: #0a0f14;
+  --color-surface-raised: #0d151b;
+  --color-line: #17303a;
+  --color-line-strong: #215666;
+
+  /* Accent */
+  --color-accent: #22d3ee;
+  --color-accent-bright: #67e8f9;
+  --color-accent-deep: #0e7490;
+
+  /* Text */
+  --color-text: #e7f6f9;
+  --color-muted: #8fa9b1;
+  --color-faint: #6b858e;
+
+  /* Type */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Shape */
+  --radius-hud: 2px;
+  --radius-panel: 4px;
+
+  /* Depth */
+  --shadow-panel: 0 24px 60px -32px rgb(0 0 0 / 0.9);
+  --shadow-glow:
+    0 0 0 1px rgb(34 211 238 / 0.22), 0 0 28px -10px rgb(34 211 238 / 0.55);
+  --shadow-glow-strong:
+    0 0 0 1px rgb(34 211 238 / 0.45), 0 0 42px -8px rgb(34 211 238 / 0.75);
+
+  /* Motion */
+  --ease-hud: cubic-bezier(0.16, 1, 0.3, 1);
+  --tracking-hud: 0.18em;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-color: var(--color-line-strong) var(--color-void);
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: rgb(34 211 238 / 0.28);
+    color: var(--color-text);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-hud);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-void);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line-strong);
+    border: 2px solid var(--color-void);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-deep);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.025) 0px,
+    rgb(255 255 255 / 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@utility text-glow {
+  text-shadow: 0 0 28px rgb(34 211 238 / 0.4);
+}
+
+@keyframes hud-typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--type-width, 40ch);
+  }
+}
+
+@keyframes hud-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.hud-type {
+  display: inline-block;
+  width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  animation: hud-typing var(--type-duration, 0.9s) steps(30, end)
+    var(--type-delay, 0s) forwards;
+}
+
+.hud-caret {
+  animation: hud-blink 1.1s steps(1, end) infinite;
+}
+
+@keyframes radar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-sweep {
+  transform-box: view-box;
+  transform-origin: 200px 200px;
+  animation: radar-spin 18s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-type {
+    width: auto !important;
+    animation: none !important;
+  }
+
+  .hud-caret {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .radar-sweep {
+    animation: none !important;
+  }
 }
